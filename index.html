@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Capture Html Element</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        body {
+            margin-top: 40px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a:link:hover {
+            text-decoration: none;
+        }
+
+        #capture-frame {
+            width: 500px;
+            margin: auto auto;
+            display: flex;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            height: 300px;
+            border: 4px solid black;
+        }
+
+        .screen-1 {
+            background: red;
+            width: 100%;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid yellow;
+        }
+
+        .screen-1:hover, .screen-2:hover  {
+            color: white;
+        }
+
+        .screen-2 {
+            background: green;
+            width: 100%;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h3 {
+            text-align: center;
+            font-weight: bold;
+            padding-bottom: 100px;
+            text-transform: uppercase;
+        }
+
+        .button {
+            margin: 0 auto;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .button button {
+            border: 1px solid black;
+            padding: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .button button:hover {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Capturing html element example <br /> by using the <a href="https://html2canvas.hertzen.com/">html2canvas</a>
+        library</h3>
+
+    <div class="button"><button type="button" onclick="saveAsImage()">Capture</button></div>
+
+    <div id="capture-frame">
+        <div class="screen-1"><span>Element 1 </span></div>
+        <div class="screen-2"><span>Element 2 </span></div>
+    </div>
+    <script>
+        function saveAsImage() {
+            const findEl = document.getElementById('capture-frame')
+            html2canvas(findEl).then((canvas) => {
+                const link = document.createElement('a')
+                document.body.appendChild(link)
+                link.download = "cmp-image.jpg"
+                link.href = canvas.toDataURL()
+                link.click()
+                link.remove()
+            })
+        }
+    </script>
+</body>
+
+</html>
